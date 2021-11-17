@@ -54,19 +54,12 @@
 
      @autoreleasepool {
          @try {
-             MPVolumeView *volumeView = [[MPVolumeView alloc] init];
-             UISlider *volumeViewSlider = nil;
-             
-             for (UIView *view in volumeView.subviews) {
-                 if ([view isKindOfClass:[UISlider class]]) {
-                     volumeViewSlider = (UISlider *)view;
-                     break;
-                 }
-             }
+             [[AVAudioSession sharedInstance] setActive: YES error: nil];
+             float vol = [[AVAudioSession sharedInstance] outputVolume];
              
              dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.0001 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
                  //NSLog(@"get val:%f",volumeViewSlider.value);
-                 result([NSNumber numberWithFloat:volumeViewSlider.value]);
+                 result([NSNumber numberWithFloat:vol]);
                  
              });
 
