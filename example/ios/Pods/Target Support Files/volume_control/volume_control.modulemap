@@ -1,0 +1,6 @@
+module volume_control {
+  umbrella header "volume_control-umbrella.h"
+
+  export *
+  module * { export * }
+}
